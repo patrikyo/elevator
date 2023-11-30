@@ -36,7 +36,7 @@ const useUpdateElevators = (elevator: Elevator) => {
     const updateElevator = async () => {
       try {
         const requestOptions = {
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
