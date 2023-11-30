@@ -16,8 +16,6 @@ const Home: React.FC = () => {
   const requestElevator = async () => {
     if (requestedFloor !== null) {
       makeElevatorRequest(requestedFloor, setElevator);
-    } else {
-      // Handle the case when requestedFloor is null (maybe show an error message)
     }
   };
 
