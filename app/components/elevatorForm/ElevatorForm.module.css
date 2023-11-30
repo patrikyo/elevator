@@ -1,0 +1,34 @@
+.elevator-form-container {
+  margin-top: 5%;
+   width: 100%;
+ }
+ 
+ 
+ .elevator-number-input {
+   width: 20%; /* Use percentage for width */
+   padding: 1.5%;
+   margin: 1%;
+   border: 2px solid #3498db;
+   border-radius: 5px;
+   font-size: 1em; /* Adjust based on your design */
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   outline: none;
+ }
+ 
+ .elevator-request-button {
+   margin-top: 2%;
+   font-size: 1em;
+   display: inline-block;
+   padding: 2% 3%; /* Use percentage for padding */
+   cursor: pointer;
+   background-color: #3498db;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   transition: background-color 0.3s ease;
+ }
+ 
+ .elevator-request-button:hover {
+   background-color: #2980b9;
+ }
