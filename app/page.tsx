@@ -1,95 +1,46 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import React, { useState } from 'react';
+import ElevatorForm from './components/elevatorForm/ElevatorForm';
+import ElevatorInfo from './components/elevatorInfo/ElevatorInfo';
+import Error from './components/error/Error';
+import styles from './page.module.css';
+import Elevator from './interfaces/Elevator.interface';
+import useElevatorRequest from './hooks/useElevatorRequest ';
 
-export default function Home() {
+const Home: React.FC = () => {
+  const [requestedFloor, setRequestedFloor] = useState<number | null>(null);
+  const [elevator, setElevator] = useState<Elevator | null>(null);
+
+  const { loading, error, makeElevatorRequest } = useElevatorRequest();
+
+  const requestElevator = async () => {
+    if (requestedFloor !== null) {
+      makeElevatorRequest(requestedFloor, setElevator);
+    } else {
+      // Handle the case when requestedFloor is null (maybe show an error message)
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+    <main className={styles['elevator-system-container']}>
+      <h1>Hiss system</h1>
+      <section className={styles['elevator-system-section']}>
+        <h2>Hisskontroll</h2>
+        <ElevatorForm
+          requestedFloor={requestedFloor}
+          setRequestedFloor={setRequestedFloor}
+          requestElevator={requestElevator}
         />
-      </div>
+      </section>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <section className={styles['elevator-system-section']} role="status" aria-live="polite">
+        <h2>{elevator ? `Hiss ${elevator.name}` : 'Ingen hiss vald'}</h2>
+        {elevator && <ElevatorInfo elevator={elevator} />}
+        {loading && <p>Laddar...</p>}
+        {error && <Error errorId="technicalError" errorMsg={ `Tyvärr inträffade ett tekniskt fel "${error}"`} />}
+      </section>
     </main>
-  )
-}
+  );
+};
+
+export default Home;
