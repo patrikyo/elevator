@@ -11,19 +11,19 @@ const useElevatorRequest = () => {
     setLoading(true);
 
     try {
+      const requestedFloorParam = new URLSearchParams({
+        requestedFloor: requestedFloor.toString(),
+      });
+
       const response = await fetch(
-        "http://localhost:3001/api/requestElevator",
+        `http://localhost:3001/api/requestElevator?${requestedFloorParam}`,
         {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ requestedFloor }),
+          method: "GET",
         }
       );
 
       if (!response.ok) {
-        throw new Error(`Förfrågan misslyckades:  ${response.status}`);
+        throw new Error(`Förfrågan misslyckades: ${response.status}`);
       }
 
       const data = await response.json();
