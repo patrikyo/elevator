@@ -18,3 +18,13 @@
   
 
   
+  
+@media screen and (max-width: 480px) {
+  .elevator-number-input {
+    width: 80%;
+  }
+
+  .elevator-request-button {
+    padding: 3% 5%;
+  }
+}

@@ -32,3 +32,32 @@
  .elevator-request-button:hover {
    background-color: #2980b9;
  }
+
+
+
+ 
+@media screen and (min-width: 481px) and (max-width: 600px) {
+  .elevator-number-input {
+    width: 70%;
+  }
+
+  .elevator-request-button {
+    padding: 3% 5%;
+  }
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .elevator-form-container {
+    font-size: 1em;
+    margin-top: 5%;
+    width: 100%;
+     text-align: center;  
+  }
+
+  .elevator-number-input {
+    width: 80%;
+    margin: 3%;
+  }
+}
